@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogYourWorkouts</title>
+    <link rel="stylesheet" href="navbarstyle.css">
+    <style>
+        
+        .day-button {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .day-button.green {
+            background-color: green;
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .box {
+            background-color: black;
+            display: flex;
+        }
+        p {
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+        }
+        .box a {
+            display: inline-block;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 3px;
+        }
+        .modal {
+            align-items: center;
+            display: flex;
+            justify-content: center; 
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(254, 126, 126, 0.7);
+            transition: all 0.4s;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .content {
+            position: absolute;
+            background: white;
+            width: 400px;
+            padding: 1em 2em;
+            border-radius: 4px;
+        } 
+        .modal:target {
+            visibility: visible;
+            opacity: 1;
+        }
+        .box-close {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            color: #fe0606;
+            text-decoration: none;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a id="active" href="Home.html"><i class="fa fa-fw fa-home"></i> Home</a>
+        <a href="Summary.html">Summary</a>
+    </div>
+    <h1>Scheduling per month</h1>
+    <h2>January</h2>
+    <button id="Jan1" class="day-button">1</button>
+    <button id="Jan2" class="day-button">2</button>
+    <button id="Jan3" class="day-button">3</button>
+    <button id="Jan4" class="day-button">4</button>
+    <button id="Jan5" class="day-button">5</button>
+    <button id="Jan6" class="day-button">6</button>
+    <button id="Jan7" class="day-button">7</button>
+    <button id="Jan8" class="day-button">8</button>
+    <button id="jan9" class="day-button">9</button>
+    <button id="jan10" class="day-button">10</button>
+    <button id="jan11" class="day-button">11</button>
+    <button id="jan12" class="day-button">12</button>
+    <button id="jan13" class="day-button">13</button>
+    <button id="Jan14" class="day-button">14</button>
+    <button id="jan15" class="day-button">15</button>
+    <button id="Jan16" class="day-button">16</button>
+    <button id="jan17" class="day-button">17</button>
+    <button id="jan18" class="day-button">18</button>
+    <button id="Jan19" class="day-button">19</button>
+    <button id="jan20" class="day-button">20</button>
+    <button id="jan21" class="day-button">21</button>
+    <button id="Jan22" class="day-button">22</button>
+    <button id="Jan23" class="day-button">23</button>
+    <button id="Jan24" class="day-button">24</button>
+    <button id="Jan25" class="day-button">25</button>
+    <button id="Jan26" class="day-button">26</button>
+    <button id="Jan27" class="day-button">27</button>
+    <button id="Jan28" class="day-button">28</button>
+    <button id="Jan29" class="day-button">29</button>
+    <button id="Jan30" class="day-button">30</button>
+    <button id="Jan31" class="day-button">31</button>
+
+    <div id="popup">
+        <form id="popup-form">
+            <label for="item-dropdown">Select type of activity:</label>
+            <select id="item-dropdown">
+                <option value="Cycling">Cycling</option>
+                <option value="Treadmill">Treadmill</option>
+                <option value="Weights">Weights</option>
+            </select>
+
+            <label for="number-input">Enter duration:</label>
+            <input type="number" id="number-input" required>
+
+            <button id="submit-button" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <button id="reset-button">Reset</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
