@@ -49,14 +49,18 @@
 
     const tableBody = document.createElement("tbody");
     for (let day in savedData) {
-        const entry = savedData[day];
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td style="text-align: center;">${day}</td>
-            <td style="text-align: center;">${entry.item}</td>
-            <td style="text-align: center;">${entry.number}</td>
-        `;
-        tableBody.appendChild(row);
+        if (savedData.hasOwnProperty(day)) {
+            const entries = savedData[day];
+            entries.forEach((entry) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td style="text-align: center;">${day}</td>
+                    <td style="text-align: center;">${entry.item}</td>
+                    <td style="text-align: center;">${entry.number}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
     }
     table.appendChild(tableBody);
 
