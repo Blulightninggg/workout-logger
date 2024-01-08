@@ -21,12 +21,19 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("popup-form").addEventListener("submit", function (event) {
         event.preventDefault();
 
+        let savedData = JSON.parse(localStorage.getItem("savedData")) || {};
+
+        if (!Array.isArray(savedData[currentDay])) {
+            savedData[currentDay] = [];
+        }
+
         // Get values from the form
         let selectedItem = document.getElementById("item-dropdown").value;
         let numberValue = document.getElementById("number-input").value;
+        let newEntry = { item: selectedItem, number: numberValue };
 
         // Update saved data
-        savedData[currentDay] = { item: selectedItem, number: numberValue };
+        savedData[currentDay].push(newEntry);
 
         // Save data to local storage
         localStorage.setItem("savedData", JSON.stringify(savedData));
@@ -36,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Hide the popup
         document.getElementById("popup").style.display = "none";
-        
     });
 
     // Handle reset button click
