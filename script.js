@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Call the displaySummary function when the Summary page is loaded
-    if (window.location.pathname.endsWith("Summary.html")) {
+    if (window.location.pathname.endsWith("summary.html")) {
         console.log("Loading Summary Page");
         displaySummary();
     }
