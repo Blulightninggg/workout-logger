@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // update button styles based on saved data
     updateButtonStyles(savedData);
 
+    // Handle click event for the January button
+    document.getElementById("january-button").addEventListener("click", function () {
+        document.getElementById("january-popup-container").style.display = "block";
+    });
+
     // Attach click event listeners to day buttons
     document.querySelectorAll(".day-button").forEach(function (button) {
         button.addEventListener("click", function () {
