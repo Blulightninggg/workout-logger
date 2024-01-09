@@ -79,6 +79,44 @@
             font-size: 30px;
         }
     </style>
+    <script> 
+        function hideJanuaryButtonsPopup() {
+            document.getElementById("january-popup").style.visibility = "hidden";
+            document.getElementById("january-popup").style.opacity = 0;
+        }
+
+        function hidePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function updateJanuaryButtonStyle() {
+            var allGreen = true;
+            // Check if all day buttons are green
+            document.querySelectorAll(".day-button").forEach(function (button) {
+                if (!button.classList.contains("green")) {
+                    allGreen = false;
+                }
+            });
+            // Update January button style based on allGreen
+            var januaryButton = document.getElementById("january-button");
+            if (allGreen) {
+                januaryButton.classList.add("green");
+            } else {
+                januaryButton.classList.remove("green");
+            }
+        }
+
+        function showJanuaryButtonsPopup() {
+        document.getElementById("january-popup").style.visibility = "visible";
+        document.getElementById("january-popup").style.opacity = 1;
+        }
+
+        function showJanDayPopup(day) {
+            document.getElementById("selected-day").innerText = "Selected Day: " + day;
+            // Show the popup when a day is clicked
+            document.getElementById("popup").style.display = "block";
+        }
+    </script>
 </head>
 <body>
     <div class="navbar">
@@ -86,56 +124,64 @@
         <a href="summary.html">Summary</a>
     </div>
     <h1>Scheduling per month</h1>
-    <h2>January</h2>
-    <button id="Jan1" class="day-button">01</button>
-    <button id="Jan2" class="day-button">02</button>
-    <button id="Jan3" class="day-button">03</button>
-    <button id="Jan4" class="day-button">04</button>
-    <button id="Jan5" class="day-button">05</button>
-    <button id="Jan6" class="day-button">06</button>
-    <button id="Jan7" class="day-button">07</button>
-    <button id="Jan8" class="day-button">08</button>
-    <button id="Jan9" class="day-button">09</button>
-    <button id="Jan10" class="day-button">10</button>
-    <button id="Jan11" class="day-button">11</button>
-    <button id="Jan12" class="day-button">12</button>
-    <button id="Jan13" class="day-button">13</button>
-    <button id="Jan14" class="day-button">14</button>
-    <button id="Jan15" class="day-button">15</button>
-    <button id="Jan16" class="day-button">16</button>
-    <button id="Jan17" class="day-button">17</button>
-    <button id="Jan18" class="day-button">18</button>
-    <button id="Jan19" class="day-button">19</button>
-    <button id="Jan20" class="day-button">20</button>
-    <button id="Jan21" class="day-button">21</button>
-    <button id="Jan22" class="day-button">22</button>
-    <button id="Jan23" class="day-button">23</button>
-    <button id="Jan24" class="day-button">24</button>
-    <button id="Jan25" class="day-button">25</button>
-    <button id="Jan26" class="day-button">26</button>
-    <button id="Jan27" class="day-button">27</button>
-    <button id="Jan28" class="day-button">28</button>
-    <button id="Jan29" class="day-button">29</button>
-    <button id="Jan30" class="day-button">30</button>
-    <button id="Jan31" class="day-button">31</button>
+    <button id="january-button" class="month-button" onclick="showJanuaryButtonsPopup()">January</button>
 
-    <div id="popup">
-        <form id="popup-form">
-            <label for="item-dropdown">Select type of activity:</label>
-            <select id="item-dropdown">
-                <option value="Cycling">Cycling</option>
-                <option value="Treadmill">Treadmill</option>
-                <option value="Weights">Weights</option>
-            </select>
+        <div id="january-popup">
+            <h2>Select a Day below to enter values</h2>
+            <button id="Jan1" class="day-button" onclick="showJanDayPopup('Jan1')">01</button>
+            <button id="Jan2" class="day-button" onclick="showJanDayPopup('Jan2')">02</button>
+            <button id="Jan3" class="day-button" onclick="showJanDayPopup('Jan3')">03</button>
+            <button id="Jan4" class="day-button" onclick="showJanDayPopup('Jan4')">04</button>
+            <button id="Jan5" class="day-button" onclick="showJanDayPopup('Jan5')">05</button>
+            <button id="Jan6" class="day-button" onclick="showJanDayPopup('Jan6')">06</button>
+            <button id="Jan7" class="day-button" onclick="showJanDayPopup('Jan7')">07</button>
+            <button id="Jan8" class="day-button" onclick="showJanDayPopup('Jan8')">08</button>
+            <button id="Jan9" class="day-button" onclick="showJanDayPopup('Jan9')">09</button>
+            <button id="Jan10" class="day-button" onclick="showJanDayPopup('Jan10')">10</button>
+            <button id="Jan11" class="day-button" onclick="showJanDayPopup('Jan11')">11</button>
+            <button id="Jan12" class="day-button" onclick="showJanDayPopup('Jan12')">12</button>
+            <button id="Jan13" class="day-button" onclick="showJanDayPopup('Jan13')">13</button>
+            <button id="Jan14" class="day-button" onclick="showJanDayPopup('Jan14')">14</button>
+            <button id="Jan15" class="day-button" onclick="showJanDayPopup('Jan15')">15</button>
+            <button id="Jan16" class="day-button" onclick="showJanDayPopup('Jan16')">16</button>
+            <button id="Jan17" class="day-button" onclick="showJanDayPopup('Jan17')">17</button>
+            <button id="Jan18" class="day-button" onclick="showJanDayPopup('Jan18')">18</button>
+            <button id="Jan19" class="day-button" onclick="showJanDayPopup('Jan19')">19</button>
+            <button id="Jan20" class="day-button" onclick="showJanDayPopup('Jan20')">20</button>
+            <button id="Jan21" class="day-button" onclick="showJanDayPopup('Jan21')">21</button>
+            <button id="Jan22" class="day-button" onclick="showJanDayPopup('Jan22')">22</button>
+            <button id="Jan23" class="day-button" onclick="showJanDayPopup('Jan23')">23</button>
+            <button id="Jan24" class="day-button" onclick="showJanDayPopup('Jan24')">24</button>
+            <button id="Jan25" class="day-button" onclick="showJanDayPopup('Jan25')">25</button>
+            <button id="Jan26" class="day-button" onclick="showJanDayPopup('Jan26')">26</button>
+            <button id="Jan27" class="day-button" onclick="showJanDayPopup('Jan27')">27</button>
+            <button id="Jan28" class="day-button" onclick="showJanDayPopup('Jan28')">28</button>
+            <button id="Jan29" class="day-button" onclick="showJanDayPopup('Jan29')">29</button>
+            <button id="Jan30" class="day-button" onclick="showJanDayPopup('Jan30')">30</button>
+            <button id="Jan31" class="day-button" onclick="showJanDayPopup('Jan31')">31</button>
+            <button onclick="hideJanuaryButtonsPopup()">Close</button>
+        </div>
 
-            <br />
-
-            <label for="number-input">Enter duration:</label>
-            <input type="number" id="number-input" required>
-
-            <button id="submit-button" type="submit">Submit</button>
-        </form>
-    </div>
+        <div id="popup" style="display: none;">
+            <form id="popup-form">
+                <h2 id="selected-day">Selected Day</h2>
+        
+                <label for="item-dropdown">Select type of activity:</label>
+                <select id="item-dropdown">
+                    <option value="Cycling">Cycling</option>
+                    <option value="Treadmill">Treadmill</option>
+                    <option value="Weights">Weights</option>
+                </select>
+        
+                <br />
+        
+                <label for="number-input">Enter duration:</label>
+                <input type="number" id="number-input" required>
+        
+                <button id="submit-button" type="submit">Submit</button>
+                <button type="button" onclick="hidePopup()">Close</button>
+            </form>
+        </div>
 
     <button id="reset-button">Reset</button>
 
