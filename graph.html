@@ -65,6 +65,7 @@ function organizeDataByMonths(savedData) {
                 monthlyData[month] = {
                     cycling: 0,
                     treadmill: 0,
+                    weights: 0,
                 };
             }
 
@@ -73,6 +74,8 @@ function organizeDataByMonths(savedData) {
                     monthlyData[month].cycling += parseInt(entry.number, 10);
                 } else if (entry.item === "Treadmill") {
                     monthlyData[month].treadmill += parseInt(entry.number, 10);
+                } else if (entry.item === "Weights") {
+                    monthlyData[month].weights += parseInt(entry.number, 10);
                 }
             });
         }
@@ -89,11 +92,13 @@ function getMonthFromDate(dateString) {
 function createDatasets(monthlyData) {
     const cyclingData = [];
     const treadmillData = [];
+    const weightsData = [];
 
     for (let month in monthlyData) {
         if (monthlyData.hasOwnProperty(month)) {
             cyclingData.push(monthlyData[month].cycling);
             treadmillData.push(monthlyData[month].treadmill);
+            weightsData.push(monthlyData[month].weights);
         }
     }
 
@@ -101,7 +106,7 @@ function createDatasets(monthlyData) {
         {
             label: 'Cycling',
             data: cyclingData,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            backgroundColor: 'rgba(75, 140, 255, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
         },
@@ -110,6 +115,13 @@ function createDatasets(monthlyData) {
             data: treadmillData,
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'Weights',
+            data: treadmillData,
+            backgroundColor: 'rgba(111, 255, 95, 0.2)',
+            borderColor: 'rgba(147, 200, 78, 1)',
             borderWidth: 1
         }
     ];
@@ -151,39 +163,10 @@ function createStackedBarGraph(labels, datasets) {
                     }
                 }
             },
-            // Add onClick event for bars
-            onClick: function (event, elements) {
-                if (elements.length > 0) {
-                    const datasetIndex = elements[0].datasetIndex;
-                    const data = myChart.data.datasets[datasetIndex].data;
-                    const hours = Math.floor(data[elements[0].index] / 60);
-                    const minutes = Math.round(data[elements[0].index] % 60);
-
-                    // Create and show the popup
-                    showPopup(`Total Hours for ${labels[elements[0].index]}: ${hours}h ${minutes}m`);
-                }
-            }
         }
     });
     document.body.appendChild(ctx.canvas);
 }
-        function showPopup(content) {
-            const popup = document.createElement("div");
-            popup.className = "popup";
-            popup.innerHTML = content;
-
-            // Close the popup when clicked anywhere off of it
-            document.addEventListener("click", function closePopup(e) {
-                if (!popup.contains(e.target)) {
-                    document.removeEventListener("click", closePopup);
-                    document.body.removeChild(popup);
-                }
-            });
-
-            // Append the popup to the body
-            document.body.appendChild(popup);
-        }
-
         function displayMonthlyTotals(monthlyData) {
             const tableContainer = document.createElement("div");
             tableContainer.className = "table-container";
