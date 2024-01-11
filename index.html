@@ -140,8 +140,10 @@
         }
 
         function showJanuaryButtonsPopup() {
-        document.getElementById("january-popup").style.visibility = "visible";
-        document.getElementById("january-popup").style.opacity = 1;
+            document.getElementById("january-popup").style.visibility = "visible";
+            document.getElementById("january-popup").style.opacity = 1;
+            document.getElementById("february-popup").style.visibility = "hidden";
+            document.getElementById("february-popup").style.opacity = 0;
         }
 
         function showJanDayPopup(day) {
@@ -152,6 +154,8 @@
         function showFebruaryButtonsPopup() {
             document.getElementById("february-popup").style.visibility = "visible";
             document.getElementById("february-popup").style.opacity = 1;
+            document.getElementById("january-popup").style.visibility = "hidden";
+            document.getElementById("january-popup").style.opacity = 0;
         }
 
         function showFebDayPopup(day) {
