@@ -197,7 +197,8 @@ function createStackedBarGraph(labels, datasets) {
                     const combinedTotalCell = document.createElement("td");
                     const totalCycling = monthlyData[month].cycling;
                     const totalTreadmill = monthlyData[month].treadmill;
-                    const combinedTotalMinutes = totalCycling + totalTreadmill;
+                    const totalWeights = monthlyData[month].weights;
+                    const combinedTotalMinutes = totalCycling + totalTreadmill + totalWeights;
                     
                     const hours = Math.floor(combinedTotalMinutes / 60);
                     const minutes = Math.round(combinedTotalMinutes % 60);
