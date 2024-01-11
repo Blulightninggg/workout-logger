@@ -46,22 +46,27 @@
     const tableBody = document.createElement("tbody");
     let totalDuration = 0; // Initialize a variable to store the total duration
 
-    for (let day in savedData) {
-        if (savedData.hasOwnProperty(day)) {
-            const entries = savedData[day];
-            entries.forEach((entry) => {
-                const row = document.createElement("tr");
-                const duration = parseInt(entry.number, 10);
-                totalDuration += duration; // Add the duration to the total
-                row.innerHTML = `
-                    <td style="text-align: center;">${day}</td>
-                    <td style="text-align: center;">${entry.item}</td>
-                    <td style="text-align: center;">${duration}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-    }
+    // Get sorted dates
+   const sortedDates = Object.keys(savedData).sort((a, b) => {
+        const dateA = new Date(`2000 ${a}`);
+        const dateB = new Date(`2000 ${b}`);
+        return dateA - dateB;
+    });
+        
+    sortedDates.forEach((day) => {
+        const entries = savedData[day];
+        entries.forEach((entry) => {
+            const row = document.createElement("tr");
+            const duration = parseInt(entry.number, 10);
+            totalDuration += duration;
+            row.innerHTML = `
+                <td style="text-align: center;">${day}</td>
+                <td style="text-align: center;">${entry.item}</td>
+                <td style="text-align: center;">${duration}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    });
     table.appendChild(tableBody);
 
     summaryContainer.appendChild(table);
