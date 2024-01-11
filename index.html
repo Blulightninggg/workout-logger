@@ -6,6 +6,9 @@
     <title>LogYourWorkouts</title>
     <link rel="stylesheet" href="navbarstyle.css">
     <style>
+        #dayclose, #monthclose {
+            background-color: #f44336;
+        }   
         #active {
             background-color: green;
         }
@@ -37,6 +40,17 @@
             transition: visibility 0s, opacity 0.5s linear;
             width: 80%;
             max-width: 400px;
+        }
+        #february-popup {
+            visibility: hidden;
+            opacity: 0;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: visibility 0s, opacity 0.5s linear;
         }
         #popup {
             display: none;
@@ -107,23 +121,6 @@
             document.getElementById("popup").style.display = "none";
         }
 
-        function updateJanuaryButtonStyle() {
-            var allGreen = true;
-            // Check if all day buttons are green
-            document.querySelectorAll(".day-button").forEach(function (button) {
-                if (!button.classList.contains("green")) {
-                    allGreen = false;
-                }
-            });
-            // Update January button style based on allGreen
-            var januaryButton = document.getElementById("january-button");
-            if (allGreen) {
-                januaryButton.classList.add("green");
-            } else {
-                januaryButton.classList.remove("green");
-            }
-        }
-
         function showJanuaryButtonsPopup() {
         document.getElementById("january-popup").style.visibility = "visible";
         document.getElementById("january-popup").style.opacity = 1;
@@ -134,17 +131,28 @@
             // Show the popup when a day is clicked
             document.getElementById("popup").style.display = "block";
         }
+        function showFebruaryButtonsPopup() {
+            document.getElementById("february-popup").style.visibility = "visible";
+            document.getElementById("february-popup").style.opacity = 1;
+        }
+
+        function showFebDayPopup(day) {
+            document.getElementById("selected-day").innerText = "Selected Day: " + day;
+            // Show the popup when a day is clicked
+            document.getElementById("popup").style.display = "block";
+        }
     </script>
 </head>
 <body>
     <div class="navbar">
         <a id="active" href="index.html"><i class="fa fa-fw fa-home"></i> Home</a>
         <a href="summary.html">Summary</a>
+        <a href="graph.html">Graph</a>
     </div>
     <h1>Scheduling per month</h1>
 
     <button id="january-button" class="month-button" onclick="showJanuaryButtonsPopup()">January</button>
-
+    <button id="february-button" class="month-button" onclick="showFebruaryButtonsPopup()">February</button>
         <div id="january-popup">
             <h2>Select a Day below to enter values</h2>
             <button id="Jan1" class="day-button" onclick="showJanDayPopup('Jan1')">01</button>
@@ -178,14 +186,48 @@
             <button id="Jan29" class="day-button" onclick="showJanDayPopup('Jan29')">29</button>
             <button id="Jan30" class="day-button" onclick="showJanDayPopup('Jan30')">30</button>
             <button id="Jan31" class="day-button" onclick="showJanDayPopup('Jan31')">31</button>
-            <button onclick="hideJanuaryButtonsPopup()">Close</button>
+            <button id="monthclose" onclick="hideJanuaryButtonsPopup()">Close</button>
+        </div>
+
+         <div id="february-popup">
+            <h2>Select a Day below to enter values</h2>
+            <button id="Feb1" class="day-button" onclick="showFebDayPopup('Feb1')">01</button>
+            <button id="Feb2" class="day-button" onclick="showFebDayPopup('Feb2')">02</button>
+            <button id="Feb3" class="day-button" onclick="showFebDayPopup('Feb3')">03</button>
+            <button id="Feb4" class="day-button" onclick="showFebDayPopup('Feb4')">04</button>
+            <button id="Feb5" class="day-button" onclick="showFebDayPopup('Feb5')">05</button>
+            <button id="Feb6" class="day-button" onclick="showFebDayPopup('Feb6')">06</button>
+            <button id="Feb7" class="day-button" onclick="showFebDayPopup('Feb7')">07</button>
+            <button id="Feb8" class="day-button" onclick="showFebDayPopup('Feb8')">08</button>
+            <button id="Feb9" class="day-button" onclick="showFebDayPopup('Feb9')">09</button>
+            <button id="Feb10" class="day-button" onclick="showFebDayPopup('Feb10')">10</button>
+            <button id="Feb11" class="day-button" onclick="showFebDayPopup('Feb11')">11</button>
+            <button id="Feb12" class="day-button" onclick="showFebDayPopup('Feb12')">12</button>
+            <button id="Feb13" class="day-button" onclick="showFebDayPopup('Feb13')">13</button>
+            <button id="Feb14" class="day-button" onclick="showFebDayPopup('Feb14')">14</button>
+            <button id="Feb15" class="day-button" onclick="showFebDayPopup('Feb15')">15</button>
+            <button id="Feb16" class="day-button" onclick="showFebDayPopup('Feb16')">16</button>
+            <button id="Feb17" class="day-button" onclick="showFebDayPopup('Feb17')">17</button>
+            <button id="Feb18" class="day-button" onclick="showFebDayPopup('Feb18')">18</button>
+            <button id="Feb19" class="day-button" onclick="showFebDayPopup('Feb19')">19</button>
+            <button id="Feb20" class="day-button" onclick="showFebDayPopup('Feb20')">20</button>
+            <button id="Feb21" class="day-button" onclick="showFebDayPopup('Feb21')">21</button>
+            <button id="Feb22" class="day-button" onclick="showFebDayPopup('Feb22')">22</button>
+            <button id="Feb23" class="day-button" onclick="showFebDayPopup('Feb23')">23</button>
+            <button id="Feb24" class="day-button" onclick="showFebDayPopup('Feb24')">24</button>
+            <button id="Feb25" class="day-button" onclick="showFebDayPopup('Feb25')">25</button>
+            <button id="Feb26" class="day-button" onclick="showFebDayPopup('Feb26')">26</button>
+            <button id="Feb27" class="day-button" onclick="showFebDayPopup('Feb27')">27</button>
+            <button id="Feb28" class="day-button" onclick="showFebDayPopup('Feb28')">28</button>
+            <button id="Feb29" class="day-button" onclick="showFebDayPopup('Feb29')">29</button>
+            <button id="monthclose" onclick="hideFebruaryButtonsPopup()">Close</button>
         </div>
 
         <div id="popup" style="display: none;">
             <form id="popup-form">
                 <h2 id="selected-day">Selected Day</h2>
         
-                <label for="item-dropdown">Select type of activity:</label>
+                <label for="item-dropdown" style="font-size: 20px";>Select type of activity:</label>
                 <select id="item-dropdown">
                     <option value="Cycling">Cycling</option>
                     <option value="Treadmill">Treadmill</option>
@@ -194,15 +236,15 @@
         
                 <br />
         
-                <label for="number-input">Enter duration:</label>
+                <label for="number-input" style="font-size: 20px";>Enter duration:</label>
                 <input type="number" id="number-input" required>
         
                 <button id="submit-button" type="submit">Submit</button>
-                <button type="button" onclick="hidePopup()">Close</button>
+                <button id="dayclose" type="button" onclick="hidePopup()">Close</button>
             </form>
         </div>
 
-    <button id="reset-button">Reset</button>
+    <button id="undo-button">Undo</button>
 
     <script src="script.js"></script>
 </body>
