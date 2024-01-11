@@ -50,19 +50,53 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("popup").style.display = "none";
     });
 
+
+    //Reset Button
+
     // Handle reset button click
-    document.getElementById("reset-button").addEventListener("click", function () {
+    //document.getElementById("reset-button").addEventListener("click", function () {
         // Clear saved data
-        savedData = {};
+        //savedData = {};
 
         // Clear button styles
-        document.querySelectorAll(".day-button").forEach(function (button) {
-            button.classList.remove("green");
-        });
+        //document.querySelectorAll(".day-button").forEach(function (button) {
+            //button.classList.remove("green");
+        //});
 
         // Save empty data to local storage
-        localStorage.setItem("savedData", JSON.stringify(savedData));
+        //localStorage.setItem("savedData", JSON.stringify(savedData));
+    //});
+
+    // Handle undo button click
+    document.getElementById("undo-button").addEventListener("click", function () {
+        // Implement the logic for undoing the last action
+        undoLastAction();
     });
+
+    // Function to implement undo functionality
+    function undoLastAction() {
+        // Retrieve the saved data from local storage
+        let savedData = JSON.parse(localStorage.getItem("savedData")) || {};
+
+        // Implement the logic to undo the last action based on your application's requirements
+        // For example, you might want to remove the last entry or revert the last change.
+        // Replace this with the actual method to get the current day
+
+        // Check if there is data for the current day
+        if (Array.isArray(savedData[currentDay]) && savedData[currentDay].length > 0) {
+            // Remove the last entered data
+            savedData[currentDay].pop();
+    
+            // Save the updated data to local storage
+            localStorage.setItem("savedData", JSON.stringify(savedData));
+    
+            // Update button style for the current day (change back to default color)
+            document.getElementById(currentDay).classList.remove("green");
+
+            updateButtonStyles(savedData);
+        }
+        // After performing the undo action, update button styles
+    }
 
     // Function to update button styles based on saved data
     function updateButtonStyles(savedData) {
