@@ -66,6 +66,7 @@ function organizeDataByMonths(savedData) {
                     cycling: 0,
                     treadmill: 0,
                     weights: 0,
+                    walking: 0,
                 };
             }
 
@@ -76,6 +77,8 @@ function organizeDataByMonths(savedData) {
                     monthlyData[month].treadmill += parseInt(entry.number, 10);
                 } else if (entry.item === "Weights") {
                     monthlyData[month].weights += parseInt(entry.number, 10);
+                } else if (entry.item === "Walking") {
+                    monthlyData[month].walking += parseInt(entry.number, 10);
                 }
             });
         }
@@ -93,12 +96,14 @@ function createDatasets(monthlyData) {
     const cyclingData = [];
     const treadmillData = [];
     const weightsData = [];
+    const walkingData =[];
 
     for (let month in monthlyData) {
         if (monthlyData.hasOwnProperty(month)) {
             cyclingData.push(monthlyData[month].cycling);
             treadmillData.push(monthlyData[month].treadmill);
             weightsData.push(monthlyData[month].weights);
+            walkingData.push(monthlyData[month].walking);
         }
     }
 
@@ -121,6 +126,13 @@ function createDatasets(monthlyData) {
             label: 'Weights',
             data: weightsData,
             backgroundColor: 'rgba(111, 255, 95, 0.2)',
+            borderColor: 'rgba(147, 200, 78, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'Weights',
+            data: walkingData,
+            backgroundColor: 'rgba(255, 10, 200, 0.2)',
             borderColor: 'rgba(147, 200, 78, 1)',
             borderWidth: 1
         }
@@ -198,7 +210,8 @@ function createStackedBarGraph(labels, datasets) {
                     const totalCycling = monthlyData[month].cycling;
                     const totalTreadmill = monthlyData[month].treadmill;
                     const totalWeights = monthlyData[month].weights;
-                    const combinedTotalMinutes = totalCycling + totalTreadmill + totalWeights;
+                    const totalWalking = monthlyData[month].walking;
+                    const combinedTotalMinutes = totalCycling + totalTreadmill + totalWeights + totalWalking;
                     
                     const hours = Math.floor(combinedTotalMinutes / 60);
                     const minutes = Math.round(combinedTotalMinutes % 60);
@@ -219,7 +232,7 @@ function createStackedBarGraph(labels, datasets) {
 <body>
     <div class="navbar">
         <a href="index.html">Home</a>
-        <a href="summary.html">Summary</a>
+        <a href="Summary.html">Summary</a>
         <a id="active" href="graph.html">Graph</a>
     </div>
     <!-- Your graph content will go here -->
