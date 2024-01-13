@@ -44,11 +44,15 @@
     const monthlyData = organizeDataByMonths(savedData);
 
     // Prepare chart
-    const labels = Object.keys(monthlyData);
+    const sortedLabels = Object.keys(monthlyData).sort((a, b) => {
+        const dateA = new Date(a + "-01");
+        const dateB = new Date(b + "-01");
+        return dateA - dateB;
+    });
     const datasets = createDatasets(monthlyData);
 
     // Create stacked bar graph
-    createStackedBarGraph(labels, datasets);
+    createStackedBarGraph(sortedLabels, datasets);
 
     displayMonthlyTotals(monthlyData);
 });
