@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     updateButtonStyles(savedData);
 
     // Handle click event for the January button
-    document.getElementById("january-button").addEventListener("click", function () {
-    document.getElementById("january-popup").style.visibility = "visible";
-    document.getElementById("january-popup").style.opacity = 1;
-});
+    document.getElementById("january-image").addEventListener("click", function () {
+        document.getElementById("january-popup-container").style.display = "block";
+    });
 
     // Attach click event listeners to day buttons
     document.querySelectorAll(".day-button").forEach(function (button) {
@@ -29,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let savedData = JSON.parse(localStorage.getItem("savedData")) || {};
 
+
         if (!Array.isArray(savedData[currentDay])) {
             savedData[currentDay] = [];
         }
@@ -38,17 +38,25 @@ document.addEventListener("DOMContentLoaded", function () {
         let numberValue = document.getElementById("number-input").value;
         let newEntry = { item: selectedItem, number: numberValue };
 
+        console.log("Got values from form")
+        
         // Update saved data
         savedData[currentDay].push(newEntry);
 
+        console.log("Update Data")
+
         // Save data to local storage
         localStorage.setItem("savedData", JSON.stringify(savedData));
+
+        console.log("Saved Data to storage")
 
         // Update button style for the current day
         document.getElementById(currentDay).classList.add("green");
 
         // Hide the popup
         document.getElementById("popup").style.display = "none";
+
+        
     });
 
 
@@ -117,3 +125,32 @@ document.addEventListener("DOMContentLoaded", function () {
         displaySummary();
     }
 });
+
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
