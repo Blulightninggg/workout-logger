@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateButtonStyles(savedData);
 
     // Handle click event for the January button
-    document.getElementById("january-image").addEventListener("click", function () {
+    document.getElementById("january-button").addEventListener("click", function () {
         document.getElementById("january-popup-container").style.display = "block";
     });
 
