@@ -8,8 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Handle click event for the January button
     document.getElementById("january-button").addEventListener("click", function () {
-        document.getElementById("january-popup-container").style.display = "block";
-    });
+    document.getElementById("january-popup").style.visibility = "visible";
+    document.getElementById("january-popup").style.opacity = 1;
+});
 
     // Attach click event listeners to day buttons
     document.querySelectorAll(".day-button").forEach(function (button) {
