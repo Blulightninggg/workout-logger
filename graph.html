@@ -203,28 +203,36 @@ function createStackedBarGraph(labels, datasets) {
             table.appendChild(headerRow);
 
             // Create table rows with monthly combined totals
-            for (let month in monthlyData) {
-                if (monthlyData.hasOwnProperty(month)) {
-                    const row = document.createElement("tr");
-                    const monthCell = document.createElement("td");
-                    monthCell.textContent = month;
-                    row.appendChild(monthCell);
+             const sortedMonths = Object.keys(monthlyData).sort(function (a, b) {
+            // Convert month names to numbers for comparison
+            const monthOrder = {
+            "January": 1, "February": 2, "March": 3, "April": 4, "May": 5, "June": 6,
+            "July": 7, "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
+            };
+            return monthOrder[a] - monthOrder[b];
+        });
 
-                    const combinedTotalCell = document.createElement("td");
-                    const totalCycling = monthlyData[month].cycling;
-                    const totalTreadmill = monthlyData[month].treadmill;
-                    const totalWeights = monthlyData[month].weights;
-                    const totalWalking = monthlyData[month].walking;
-                    const combinedTotalMinutes = totalCycling + totalTreadmill + totalWeights + totalWalking;
-                    
-                    const hours = Math.floor(combinedTotalMinutes / 60);
-                    const minutes = Math.round(combinedTotalMinutes % 60);
-                    
-                    combinedTotalCell.textContent = `${hours}h ${minutes}m`;
-                    row.appendChild(combinedTotalCell);
+            // Create table rows with monthly combined totals
+            for (const month of sortedMonths) {
+                const row = document.createElement("tr");
+                const monthCell = document.createElement("td");
+                monthCell.textContent = month;
+                row.appendChild(monthCell);
 
-                    table.appendChild(row);
-                }
+                const combinedTotalCell = document.createElement("td");
+                const totalCycling = monthlyData[month].cycling;
+                const totalTreadmill = monthlyData[month].treadmill;
+                const totalWeights = monthlyData[month].weights;
+                const totalWalking = monthlyData[month].walking;
+                const combinedTotalMinutes = totalCycling + totalTreadmill + totalWeights + totalWalking;
+
+                const hours = Math.floor(combinedTotalMinutes / 60);
+                const minutes = Math.round(combinedTotalMinutes % 60);
+
+                combinedTotalCell.textContent = `${hours}h ${minutes}m`;
+                row.appendChild(combinedTotalCell);
+
+                table.appendChild(row);
             }
 
             tableContainer.appendChild(table);
