@@ -128,14 +128,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to update button styles based on saved data
     function updateButtonStyles(savedData) {
-        for (let day in savedData) {
-            if (savedData.hasOwnProperty(day)) {
-                let button = document.getElementById(day);
-                if (button) {
-                    button.style.backgroundColor = "green";
-                }
+        // Set buttons with data to green, and buttons without data to grey
+        let allButtons = document.querySelectorAll('.day-button'); // Replace 'day-button' with the actual class name of your buttons
+    
+        allButtons.forEach(button => {
+            let day = button.id;
+            if (savedData.hasOwnProperty(day) && Array.isArray(savedData[day]) && savedData[day].length > 0) {
+                // Button has data, set background color to green
+                button.style.backgroundColor = "green";
+            } else {
+                // Button does not have data, set background color to grey
+                button.style.backgroundColor = "white";
             }
-        }
+        });
     }
 
      // Function to delete data for a specific day
@@ -162,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById(selectedDay).classList.remove("green");
 
             updateButtonStyles(savedData);
+            hidePopup();
         }
     }
 
