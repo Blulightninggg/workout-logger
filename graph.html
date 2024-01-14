@@ -37,22 +37,20 @@
         }
     </style>
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    let savedData = JSON.parse(localStorage.getItem("savedData")) || {};
-
-    // Transform the data into a structure organized by months
-    const monthlyData = organizeDataByMonths(savedData);
-
-    // Prepare chart
-    const sortedLabels = Object.keys(monthlyData).sort((a, b) => {
+        let savedData = JSON.parse(localStorage.getItem("savedData")) || {};
+        const monthlyData = organizeDataByMonths(savedData);
+        const sortedMonths = Object.keys(monthlyData).sort((a, b) => {
         const dateA = new Date(a + "-01");
         const dateB = new Date(b + "-01");
         return dateA - dateB;
-    });
-    const datasets = createDatasets(monthlyData);
+        });
+    document.addEventListener("DOMContentLoaded", function () {
+    
+
+    const datasets = createDatasets(monthlyData, sortedMonths);
 
     // Create stacked bar graph
-    createStackedBarGraph(sortedLabels, datasets);
+    createStackedBarGraph(sortedMonths, datasets);
 
     displayMonthlyTotals(monthlyData);
 });
@@ -96,20 +94,18 @@ function getMonthFromDate(dateString) {
     return date.toLocaleString('en-US', { month: 'long' });
 }
 
-function createDatasets(monthlyData) {
+function createDatasets(monthlyData, sortedMonths) {
     const cyclingData = [];
     const treadmillData = [];
     const weightsData = [];
     const walkingData =[];
 
-    for (let month in monthlyData) {
-        if (monthlyData.hasOwnProperty(month)) {
-            cyclingData.push(monthlyData[month].cycling);
-            treadmillData.push(monthlyData[month].treadmill);
-            weightsData.push(monthlyData[month].weights);
-            walkingData.push(monthlyData[month].walking);
-        }
-    }
+    sortedMonths.forEach((month) => {
+        cyclingData.push(monthlyData[month].cycling);
+        treadmillData.push(monthlyData[month].treadmill);
+        weightsData.push(monthlyData[month].weights);
+        walkingData.push(monthlyData[month].walking);
+    });
 
     return [
         {
@@ -202,15 +198,11 @@ function createStackedBarGraph(labels, datasets) {
 
             table.appendChild(headerRow);
 
-            // Create table rows with monthly combined totals
-             const sortedMonths = Object.keys(monthlyData).sort(function (a, b) {
-            // Convert month names to numbers for comparison
-            const monthOrder = {
-            "January": 1, "February": 2, "March": 3, "April": 4, "May": 5, "June": 6,
-            "July": 7, "August": 8, "September": 9, "October": 10, "November": 11, "December": 12
-            };
-            return monthOrder[a] - monthOrder[b];
-        });
+            const sortedMonths = Object.keys(monthlyData).sort((a, b) => {
+                const dateA = new Date(a + "-01");
+                const dateB = new Date(b + "-01");
+                 return dateA - dateB;
+            });
 
             // Create table rows with monthly combined totals
             for (const month of sortedMonths) {
