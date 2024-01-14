@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle click event for the January button
     document.getElementById("january-image").addEventListener("click", function () {
         document.getElementById("january-popup-container").style.display = "block";
+        
+    document.getElementById("delete-button").addEventListener("click", function () {
+        showDeleteConfirmation();
+    });
     });
 
     // Attach click event listeners to day buttons
@@ -30,9 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
     
-    document.getElementById("delete-button").addEventListener("click", function () {
-        showDeleteConfirmation();
-    });
+    
 
     // Handle popup form submission outside the loop
     document.getElementById("popup-form").addEventListener("submit", function (event) {
