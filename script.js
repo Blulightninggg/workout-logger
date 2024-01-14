@@ -22,6 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    function showDeleteConfirmation() {
+        const confirmation = confirm("Are you sure you want to delete data for the selected day?");
+        if (confirmation) {
+            // Implement the logic for deleting data
+            deleteData(currentDay);
+        }
+    }
+    
     document.getElementById("delete-button").addEventListener("click", function () {
         showDeleteConfirmation();
     });
@@ -80,14 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // Save empty data to local storage
         //localStorage.setItem("savedData", JSON.stringify(savedData));
     //});
-
-    function showDeleteConfirmation() {
-        const confirmation = confirm("Are you sure you want to delete data for the selected day?");
-        if (confirmation) {
-            // Implement the logic for deleting data
-            deleteData(currentDay);
-        }
-    }
 
    
 
