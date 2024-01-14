@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    document.getElementById("delete-button").addEventListener("click", function () {
+        showDeleteConfirmation();
+    });
+
     // Handle popup form submission outside the loop
     document.getElementById("popup-form").addEventListener("submit", function (event) {
         event.preventDefault();
@@ -82,6 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
         undoLastAction();
     });
 
+    document.getElementById("undo-button").addEventListener("click", function () {
+        // Implement the logic for undoing the last action
+        undoLastAction();
+    });
+
     // Function to implement undo functionality
     function undoLastAction() {
         // Retrieve the saved data from local storage
@@ -108,14 +117,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Function to update button styles based on saved data
-    function updateButtonStyles(savedData) {
-        for (let day in savedData) {
-            if (savedData.hasOwnProperty(day)) {
-                let button = document.getElementById(day);
-                if (button) {
-                    button.classList.add("green");
-                }
+function updateButtonStyles(savedData) {
+    for (let day in savedData) {
+        if (savedData.hasOwnProperty(day)) {
+            let button = document.getElementById(day);
+            if (button) {
+                // Set background color to green directly
+                button.style.backgroundColor = "green";
             }
+        }
+    }
+}
+
+    // Function to delete data for a specific day
+     function deleteData(selectedDay) {
+        let savedData = JSON.parse(localStorage.getItem("savedData")) || {};
+
+        if (Array.isArray(savedData[selectedDay]) && savedData[selectedDay].length > 0) {
+            // Remove the data for the selected day
+            savedData[selectedDay] = [];
+
+            // Save the updated data to local storage
+            localStorage.setItem("savedData", JSON.stringify(savedData));
+            
+            let dayButton = document.getElementById(selectedDay);
+            if (dayButton) {
+                dayButton.classList.remove("green");
+                dayButton.style.backgroundColor = "white"; // Set background color to white
+            } else {
+                console.log("Element not found for ID:", selectedDay);
+            }
+
+
+            // Update button style for the selected day (change back to default color)
+            document.getElementById(selectedDay).classList.remove("green");
+
+            updateButtonStyles(savedData);
         }
     }
 
