@@ -136,7 +136,7 @@
         .day-button.green {
             background-color: green;
         }
-        #resetbutton {
+        #delete-button {
             background-color: red;
             color: white;
             padding: 15px 20px;
@@ -1366,33 +1366,7 @@
             </form>
         </div>
 
-    <button id="resetbutton" type="button" onclick="showConfirmation()">Reset</button>
-
-    <div id="confirmationPopup">
-        <p>Are you sure you want to reset all data entered?</p>
-        <button onclick="resetForm()">Yes</button>
-        <button onclick="hideConfirmation()">No</button>
-    </div>
-
-    <script>
-        function showConfirmation() {
-            // Display the confirmation popup
-            document.getElementById("confirmationPopup").style.display = "block";
-        }
-
-        function hideConfirmation() {
-            // Hide the confirmation popup
-            document.getElementById("confirmationPopup").style.display = "none";
-        }
-
-        function resetForm() {
-            // Clear local storage
-            localStorage.clear();
-            
-            // Hide the confirmation popup
-            hideConfirmation();
-        }
-    </script>
+    <button id="delete-button" type="button">Delete Current Day</button>
 
     <script src="script.js"></script>
 </body>
