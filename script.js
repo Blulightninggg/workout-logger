@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (savedData.hasOwnProperty(day)) {
                 let button = document.getElementById(day);
                 if (button) {
-                    button.classList.add("green");
+                    button.style.backgroundColor = "green";
                 }
             }
         }
