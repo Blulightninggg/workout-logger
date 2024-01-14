@@ -55,13 +55,14 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Saved Data to storage")
 
         // Update button style for the current day
-        document.getElementById(currentDay).classList.add("green");
+        document.getElementById(currentDay).style.backgroundColor = "green";
 
         // Hide the popup
         document.getElementById("popup").style.display = "none";
 
         
     });
+
 
 
     //Reset Button
@@ -80,12 +81,17 @@ document.addEventListener("DOMContentLoaded", function () {
         //localStorage.setItem("savedData", JSON.stringify(savedData));
     //});
 
-    // Handle undo button click
-    document.getElementById("undo-button").addEventListener("click", function () {
-        // Implement the logic for undoing the last action
-        undoLastAction();
-    });
+    function showDeleteConfirmation() {
+        const confirmation = confirm("Are you sure you want to delete data for the selected day?");
+        if (confirmation) {
+            // Implement the logic for deleting data
+            deleteData(currentDay);
+        }
+    }
 
+   
+
+    // Handle undo button click
     document.getElementById("undo-button").addEventListener("click", function () {
         // Implement the logic for undoing the last action
         undoLastAction();
@@ -109,27 +115,28 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("savedData", JSON.stringify(savedData));
     
             // Update button style for the current day (change back to default color)
-            document.getElementById(currentDay).classList.remove("green");
+            document.getElementById(currentDay).style.backgroundColor = "white";
 
             updateButtonStyles(savedData);
         }
         // After performing the undo action, update button styles
     }
 
+
+
     // Function to update button styles based on saved data
-function updateButtonStyles(savedData) {
-    for (let day in savedData) {
-        if (savedData.hasOwnProperty(day)) {
-            let button = document.getElementById(day);
-            if (button) {
-                // Set background color to green directly
-                button.style.backgroundColor = "green";
+    function updateButtonStyles(savedData) {
+        for (let day in savedData) {
+            if (savedData.hasOwnProperty(day)) {
+                let button = document.getElementById(day);
+                if (button) {
+                    button.classList.add("green");
+                }
             }
         }
     }
-}
 
-    // Function to delete data for a specific day
+     // Function to delete data for a specific day
      function deleteData(selectedDay) {
         let savedData = JSON.parse(localStorage.getItem("savedData")) || {};
 
