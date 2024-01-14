@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle click event for the January button
     document.getElementById("january-image").addEventListener("click", function () {
         document.getElementById("january-popup-container").style.display = "block";
-        
+    });
     document.getElementById("delete-button").addEventListener("click", function () {
         showDeleteConfirmation();
     });
-    });
+    
 
     // Attach click event listeners to day buttons
     document.querySelectorAll(".day-button").forEach(function (button) {
